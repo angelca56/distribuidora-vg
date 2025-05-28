@@ -3,6 +3,7 @@
  */
 
 package tecnologiavg;
+import tecnologiavg.reportes.ReporteHistorial;
 
 /**
  *
@@ -11,6 +12,7 @@ package tecnologiavg;
 public class TecnologiaVG {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ReporteHistorial reporte = new ReporteHistorial();
+        reporte.mostrarHistorialCliente();
     }
 }

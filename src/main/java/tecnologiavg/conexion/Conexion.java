@@ -40,8 +40,5 @@ public class Conexion {
         {
             System.out.println("Error al conectarse");
         }
-    }
-    
-    
-    
+    }   
 }
