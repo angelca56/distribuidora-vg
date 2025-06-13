@@ -1,17 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package tecnologiavg.dominio;
 
 import java.util.Objects;
 
-/**
- *
- * @author delma
- */
 public class Cliente {
-
+    
+    //Definir variables que usaremos para los Clientes
+    private int id;
     private String nit;
     private String nombreApellido;
     private String direccion;
@@ -19,7 +14,19 @@ public class Cliente {
     private String telefono;
     private double credito;
 
-    // Constructor
+    //Constructor con ID: este constructor nos sirve para guardar el ID
+    public Cliente(int id, String nit, String nombreApellido, String direccion,
+               String correoElectronico, String telefono, double credito) {
+    this.id = id;
+    this.nit = nit;
+    this.nombreApellido = nombreApellido;
+    this.direccion = direccion;
+    this.correoElectronico = correoElectronico;
+    this.telefono = telefono;
+    this.credito = credito;
+}
+    
+    // Constructor // este constructor sirve para cuando vamos a llamar la funcion agregar un cliente
     public Cliente(String nit, String nombreApellido, String direccion,
                    String correoElectronico, String telefono, double credito) {
         this.nit = nit;
@@ -29,7 +36,18 @@ public class Cliente {
         this.telefono = telefono;
         this.credito = credito;
     }
-
+    
+    //Get = Leer
+    //Set = Modificar
+    public int getId() {
+    return id;
+    }
+    
+     public void setId(int id) {
+        this.id = id;
+    }
+   
+    
     public String getNit() {
         return nit;
     }
@@ -78,14 +96,11 @@ public class Cliente {
         this.credito = credito;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" + "nit=" + nit + ", nombreApellido=" + nombreApellido + ", direccion=" + direccion + ", correoElectronico=" + correoElectronico + ", telefono=" + telefono + ", credito=" + credito + '}';
-    }
-
+    //Evaluar nuestros datos con hashCOde y equals    
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
+        hash = 59 * hash + this.id;
         hash = 59 * hash + Objects.hashCode(this.nit);
         hash = 59 * hash + Objects.hashCode(this.nombreApellido);
         hash = 59 * hash + Objects.hashCode(this.direccion);
@@ -107,6 +122,9 @@ public class Cliente {
             return false;
         }
         final Cliente other = (Cliente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (Double.doubleToLongBits(this.credito) != Double.doubleToLongBits(other.credito)) {
             return false;
         }
@@ -124,4 +142,10 @@ public class Cliente {
         }
         return Objects.equals(this.telefono, other.telefono);
     }
+
+    //El toString = funcionar para mandar a imprimir
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nit=" + nit + ", NombreApellido=" + nombreApellido + ", Direccion=" + direccion + ", CorreoElectronico=" + correoElectronico + ", telefono=" + telefono + ", credito=" + credito + '}';
+    }   
 }

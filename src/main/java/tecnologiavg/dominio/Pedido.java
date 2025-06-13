@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package tecnologiavg.dominio;
 
 import java.util.Objects;
 
-/**
- *
- * @author delma
- */
 public class Pedido {
     
+    //Definimos variables que usaremos para los pedidos
     private int noPedido;
     private String nitCliente;
     private String producto;
@@ -19,7 +13,7 @@ public class Pedido {
     private double precio;
     private double total;
 
-    // Constructor
+    // Constructor para las funciones de pedido
     public Pedido (int noPedido, String nitCliente, String producto, int cantidad, double precio) {
         this.noPedido = noPedido;
         this.nitCliente = nitCliente;
@@ -28,7 +22,8 @@ public class Pedido {
         this.precio = precio;
         this.total = cantidad * precio;
     }
-
+    
+    //Get para leer y Set para modificar
     public int getNoPedido() {
         return noPedido;
     }
@@ -77,13 +72,13 @@ public class Pedido {
         this.total = total;
     }
 
+    //Imprimir datos con toString
     @Override
     public String toString() {
         return "Pedido{" + "noPedido=" + noPedido + ", nitCliente=" + nitCliente + ", producto=" + producto + ", cantidad=" + cantidad + ", precio=" + precio + ", total=" + total + '}';
     }
-    
-    
-
+     
+    //Evaluar datos
     @Override
     public int hashCode() {
         int hash = 5;
@@ -121,5 +116,5 @@ public class Pedido {
             return false;
         }
         return Objects.equals(this.nitCliente, other.nitCliente);
-    }
+    }   
 }

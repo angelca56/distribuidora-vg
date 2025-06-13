@@ -9,11 +9,11 @@ import java.util.Scanner;
 import tecnologiavg.conexion.Conexion;
 
 public class ReporteHistorial {
-    public void mostrarHistorialCliente() {
-        Scanner entrada = new Scanner(System.in);
+
+    public void mostrarHistorialCliente(Scanner scanner) {
         System.out.println("\n--- REPORTE DE HISTORIAL DEL CLIENTE ---");
         System.out.print("Ingrese el NIT del cliente: ");
-        String nit = entrada.nextLine();
+        String nit = scanner.nextLine();
 
         Connection conexion = null;
         PreparedStatement psCliente = null;
@@ -24,20 +24,22 @@ public class ReporteHistorial {
         try {
             conexion = Conexion.getConexion();
 
-            // 1. Buscar datos del cliente
-            String sqlCliente = "SELECT nombre_apellido, direccion, correo_electronico, telefono FROM cliente WHERE nit = ?";
+            //Buscar datos del cliente
+            String sqlCliente = "SELECT id, nombre_apellido, direccion, correo_electronico, telefono FROM cliente WHERE nit_cliente = ?";
             psCliente = conexion.prepareStatement(sqlCliente);
             psCliente.setString(1, nit);
             rsCliente = psCliente.executeQuery();
 
             if (rsCliente.next()) {
+                //Imprimir datos
                 System.out.println("\n--- Datos del Cliente ---");
+                System.out.println("ID: " + rsCliente.getInt("id"));
                 System.out.println("Nombre: " + rsCliente.getString("nombre_apellido"));
                 System.out.println("Dirección: " + rsCliente.getString("direccion"));
                 System.out.println("Correo: " + rsCliente.getString("correo_electronico"));
                 System.out.println("Teléfono: " + rsCliente.getString("telefono"));
 
-                // 2. Buscar pedidos del cliente
+                //Buscar pedidos del cliente
                 String sqlPedidos = "SELECT no_pedido, producto, cantidad, precio, total FROM pedido WHERE nit_cliente = ?";
                 psPedidos = conexion.prepareStatement(sqlPedidos);
                 psPedidos.setString(1, nit);
@@ -47,6 +49,7 @@ public class ReporteHistorial {
                 boolean hayPedidos = false;
 
                 while (rsPedidos.next()) {
+                    //Imprimir datos
                     hayPedidos = true;
                     System.out.println("No. Pedido: " + rsPedidos.getInt("no_pedido"));
                     System.out.println("Producto: " + rsPedidos.getString("producto"));
@@ -68,11 +71,21 @@ public class ReporteHistorial {
             System.out.println("Error al consultar historial: " + e.getMessage());
         } finally {
             try {
-                if (rsCliente != null) rsCliente.close();
-                if (rsPedidos != null) rsPedidos.close();
-                if (psCliente != null) psCliente.close();
-                if (psPedidos != null) psPedidos.close();
-                if (conexion != null) conexion.close();
+                if (rsCliente != null) {
+                    rsCliente.close();
+                }
+                if (rsPedidos != null) {
+                    rsPedidos.close();
+                }
+                if (psCliente != null) {
+                    psCliente.close();
+                }
+                if (psPedidos != null) {
+                    psPedidos.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
             } catch (SQLException e) {
                 System.out.println("Error al cerrar conexiones: " + e.getMessage());
             }

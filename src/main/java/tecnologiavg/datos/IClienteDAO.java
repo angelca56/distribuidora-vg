@@ -1,29 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package tecnologiavg.datos;
 
 import java.util.List;
 import tecnologiavg.dominio.Cliente;
 
-/**
- *
- * @author delma
- */
 public interface IClienteDAO {
+
     // Agrega un nuevo cliente
     boolean agregarCliente(Cliente cliente);
 
-    // Busca cliente por NIT
-    Cliente buscarCliente(String nit);
+    // Buscar Cliente por el ID
+    Cliente buscarClientePorId(int id);
 
-    // Actualiza datos del cliente
+    // Buscar Cliente porel Nit
+    Cliente buscarClientePorNit(String nit);
+
+    // Actualizar datos de los clientes
     boolean actualizarCliente(Cliente cliente);
 
-    // Elimina un cliente por NIT
-    boolean eliminarCliente(String nit);
+    // Eliminar Clientes por el ID
+    boolean eliminarClientePorId(int id);
 
-    // Lista todos los clientes
+    //Imprimir el listado de todos los Clientes
     List<Cliente> obtenerTodosLosClientes();
 }
